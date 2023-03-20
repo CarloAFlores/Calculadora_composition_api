@@ -1,11 +1,11 @@
-import Calculadora from '@/components/Calculadora.vue';
 <template>
+<div class="body">
   <div class="calculadora">
     <div class="calculadora__pantalla"><p>{{pantalla || 0}}</p></div>
     <div class="botones">
         <button @click="limpiar" class="botones__items">C</button>
         <button @click="negativo" class="botones__items">+/-</button>
-        <button class="botones__items">%</button>
+        <button @click="porciento" class="botones__items">%</button>
         <button @click="division" class="botones__items">/</button>
 
         <button @click="numero('7')" class="botones__items">7</button>
@@ -28,6 +28,7 @@ import Calculadora from '@/components/Calculadora.vue';
         <button @click="igual" class="botones__items igual">=</button>
     </div>
   </div>
+</div>  
 </template>
 
 <script>
@@ -46,6 +47,9 @@ export default {
     const negativo = () =>{
       store.dispatch('negativa')
     }
+    const porciento = () =>{
+      store.dispatch('porciento')
+    }
     const numero = (num) =>{
       store.dispatch('agregarNumero',num)
     }
@@ -61,6 +65,9 @@ export default {
     const suma = (()=>{
       store.dispatch('suma')
     })
+    const punto = (()=>{
+      store.dispatch('punto')
+    })
     const igual = (()=>{
       store.dispatch('igual')
     })
@@ -68,11 +75,13 @@ export default {
       pantalla,
       limpiar,
       negativo,
+      porciento,
       numero,
       division,
       multiplicacion,
       resta,
       suma,
+      punto,
       igual
     }
   }
@@ -80,6 +89,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.body{
+  display: grid;
+  place-items: center;
+}
 .calculadora{
     background: linear-gradient(100deg, rgba(92, 81, 81, 0.7), rgba(92, 78, 78, 0.7));
     width: 40%;
